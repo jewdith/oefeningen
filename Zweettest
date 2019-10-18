@@ -1,0 +1,23 @@
+def uitslagBepalen (aantal_maanden, CF_waarde):
+    if aantal_maanden <= 6:
+        if CF_waarde <= 29:
+            return "hoogst onwaarschijnlijk"
+        elif 30 <= CF_waarde <= 59:
+            return "is mogelijk"
+        elif CF_waarde >= 60:
+            return "is waarschijnlijk"
+    if aantal_maanden >=7:
+        if CF_waarde <= 39:
+            return "hoogst onwaarschijnlijk"
+        elif 40 <= CF_waarde <= 59:
+            return "is mogelijk"
+        elif CF_waarde >= 60:
+            return "is waarschijnlijk"
+
+
+if __name__ == '__main__':
+    aantal_maanden = int(input("aantal maanden:"))
+    CF_waarde = int(input("CF waarde in mmol/l:"))
+
+    uitslag = uitslagBepalen(aantal_maanden,CF_waarde)
+    print("CF is " + uitslag)

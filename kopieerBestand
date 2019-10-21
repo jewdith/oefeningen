@@ -1,0 +1,11 @@
+# https://dodona.ugent.be/nl/exercises/1985652400/
+from shutil import copyfile
+def kopieer(bronbestand, doelbestand):
+    try:
+        copyfile(bronbestand, doelbestand)
+    except: print("iets ging verkeerd")
+    finally: print("het is succevol gekopieerd naar "+ doelbestand)
+
+if __name__ == '__main__':
+    # nieuwe file hoeft nog niet te bestaan.
+    kopieer("OG_file.txt","Copied_file.txt")

@@ -1,0 +1,11 @@
+# https://dodona.ugent.be/nl/exercises/2071746302/
+
+aant_appels = int(input("hoeveel appels: "))
+kist = aant_appels//20
+pallet = kist//35
+restkisten = kist%35
+restappels = aant_appels % 20
+
+print(str(pallet) + " gevulde palet(ten)")
+print(str(restkisten) +" kisten gevuld met resterende apples" )
+print(str(restappels) + " resterende appels")

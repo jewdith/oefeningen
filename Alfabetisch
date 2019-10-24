@@ -1,0 +1,11 @@
+# https://dodona.ugent.be/nl/exercises/117689921/
+
+def alfabetisch(zin):
+    # split woorden op
+    zin= zin.split()
+    # zet ze op volgorde
+    nieuw = sorted(zin, reverse=False)
+    return nieuw
+
+if __name__ == '__main__':
+    print(alfabetisch('zeven zatte zaventemse zotten zullen zeven zomerse zondagen zwemmen zonder zwembroek'))

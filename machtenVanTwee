@@ -1,0 +1,11 @@
+# https://dodona.ugent.be/en/exercises/922175293/
+
+invoer = input("Geef bovengrens:")
+uitvoer = 1
+lijst = list()
+while uitvoer <= int(invoer):
+    uitvoer *= 2
+    lijst.append(uitvoer)
+lijst = lijst[:-1]
+string = ' '.join(str(e) for e in lijst)
+print(string)

@@ -1,0 +1,40 @@
+from rdflib import Graph, Literal, BNode,Namespace, RDF, URIRef
+
+#namespaces die voorkomen zijn FOAF, DbPedia en eigen namespace (=JW)
+from rdflib.namespace import FOAF
+JW= Namespace("https://www.hsleiden.nl/")
+DB = Namespace("http://dbpedia.org/page/Vocabulary_OneSource")
+
+g = Graph()
+# Subject identifiers.
+persoon1 = BNode()
+persoon2 = BNode()
+
+# voeg triples toe aan Graph
+#triples persoon 1
+g.add((persoon1, DB.subclass, Literal("bookkeeper", lang="en")))
+g.add((persoon1, FOAF.openID, Literal("AAB12", lang="en")))
+g.add((persoon1, FOAF.surname, Literal("asd", lang="en")))
+g.add((persoon1, FOAF.gender, Literal("female", lang="en")))
+g.add((persoon1, JW.placeofdeath, Literal("leiden", lang="en")))
+g.add((persoon1, FOAF.knows, persoon2))
+
+#triples persoon 2
+g.add((persoon2, FOAF.knows, persoon1))
+g.add((persoon2, FOAF.surname, Literal("Caibna", lang="en")))
+g.add((persoon2, FOAF.gender, Literal("male", lang="en")))
+g.add((persoon2, JW.placeofbirth, Literal("leiden", lang="en")))
+g.add((persoon2, FOAF.openID, Literal("BDA14", lang="en")))
+
+# Itereer over triple en print uit
+print("--- printing raw triples ---")
+for s, p, o in g:
+    print((s, p, o))
+
+# Bind prefixes, maakt output leesbaarder
+g.bind("JW", JW)
+g.bind("DB",DB)
+g.bind("foaf", FOAF)
+
+#Serialize Graph naar bestemming
+print(g.serialize(format="turtle"))

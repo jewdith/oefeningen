@@ -1,0 +1,43 @@
+import requests #access urls
+from bs4 import BeautifulSoup #scrape page
+import smtplib #verstuurd emails
+url = 'https://www.amazon.nl/Nikon-D7500-18-140Mm-3-5-5-6-Spiegelreflexcamera/dp/B06ZYCS62R/ref=sr_1_2?__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=camera&qid=1590956057&refinements=p_36%3A17170626031&rnid=16365235031&s=electronics&sr=1-2'
+headers={"User-Agent":'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'} #google my user agent
+
+page = requests.get(url, headers=headers)
+soup = BeautifulSoup(page.content,'html.parser')
+# print(soup.prettify())
+
+def check_pricing():
+    title=soup.find(id='productTitle').get_text()
+    price=soup.find(id='priceblock_ourprice').get_text()
+    convertPrice = float(price[1:5]) #haal eerste 5 char op
+
+    if(convertPrice <1.700):
+        send_mail()
+    # print(title.strip())
+    # print(price.strip())
+
+def send_mail():
+    # app password ophalen bij: https://myaccount.google.com/apppasswords?rapt=AEjHL4Njsq8dMsWUfLuf2zFCoJuImyk41IX5_HSd9WjsIGcjY8sZaGeec8-5Cm4GKJlebL0ylqLI6h2gVSsth0Bv2SsbUzDmSg
+    server = smtplib.SMTP('smtp.gmail.com',587) #gmail
+    server.ehlo() #maakt connectie met gmail
+    server.starttls() #encrypt connectie
+    server.ehlo()
+    server.login('{gmailadres}','wachtwoord')
+    subject = 'prijs is gedaald naar gewenst bedrag'
+    body = 'klik op de link judith. je hebt deze code zelf gemaakt: ' + url
+
+    bericht = f'Subject:{subject}\n\n{body}'
+    server.sendmail('gmailadres'#from
+                     ,'gmailadres' #to,
+                    ,bericht)
+    print('bericht verstuurd')
+    server.quit()
+#gmailadres en wachtwoord moeten vervangen worden met variabelen
+
+if __name__ == '__main__':
+    check_pricing()
+
+#----------------------------------------------
+# bron: https://www.youtube.com/watch?v=Bg9r_yLk7VY&list=PLN8KVA05IfsEnAhNMvmR7apvMvGaUlth0&index=6

@@ -1,0 +1,8 @@
+def is_palindrome(word):
+    word = word.lower()
+    half = len(word) // 2
+    m = len(word) % 2
+    return word[:half] == word[:half+m-1:-1]
+
+
+print(is_palindrome('Deleveled'))

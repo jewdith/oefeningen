@@ -1,24 +1,23 @@
 def group_by_owners(files):
-    val = (list(files.values()))  # get values from dict
-    val = set(val)  # make values a set to remove duplicates
-    val = list(val)  # make set a list so we can work with it
-    keyst = (list(files.keys()))  # get keys from dict
-    result = {}  # creat empty dict for output
-    for i in range(len(val)):  # loop over values(owners)
-        for j in range(len(keyst)):  # loop over keys(files)
-            if val[i] == list(files.values())[j]:  # boolean to pick out files for current owner loop
-                dummylist = [keyst[
-                                 j]]  # make string pulled from dict a list so we can add it to the output in the correct format
-                if val[
-                    i] in result:  # if the owner is already in the output add the new file to the existing dictionary entry
-                    result[val[i]].append(keyst[j])  # add the new file
-                else:  # if the owner is NOT already in the output make a new entry
-                    result[val[i]] = dummylist  # make a new entry
-    return result
+    w = (list(files.values()))  # haal dict waarden op
+    w = set(w)  # verwijder herhaalde waarden
+    w = list(w)  #list heeft funties die nodig zijn
+    sleutel = (list(files.keys()))  
+    output = {}  #resultaat word hiering opgeslagen
+    for i in range(len(w)):  # loop over values(owners)
+        for j in range(len(sleutel)):  # loop over keys(files)
+            if w[i] == list(files.values())[j]:  # haalt file(s) van gewenste owner op
+                tmp_list = [sleutel[j]]  # verander naar string om format aan te passen
+                if w[i] in output:
+                    output[w[i]].append(sleutel[j])  # als owner correcte format is, voeg owner toe aan lijst
+                else:
+                    output[w[i]] = tmp_list  # new entry als owner niet bestaat
+    return output
+
 
 if __name__ == "__main__":
     files = {
-        'Input.txt': 'Randy',
+        'Input.txt': 'Andy',
         'Code.py': 'Stan',
         'Output.txt': 'Randy'
     }

@@ -1,0 +1,30 @@
+class Song:
+    def __init__(self, name):
+        self.name = name
+        self.next = None #liedjes verwijzen niet naar elkaar
+
+    def next_song(self, song):
+        self.next = song
+
+#-----------------------------------------------------------------------------------------------------------
+    def is_repeating_playlist(self): #True als playlist herhaalt, False wanneer unieke songs zijn.
+        playlist = {self} #list alle liedjes
+        song = self.next
+        while song:
+            if song in playlist:
+                return True
+            else:
+                playlist.add(song)
+                song = song.next
+        return False
+#-----------------------------------------------------------------------------------------------
+
+
+if __name__ == '__main__':
+    first = Song("eye of the tiger")
+    second = Song("Hello")
+
+    first.next_song(second) #True, want beide liedjes verwijzen naar elkaar
+    second.next_song(first)
+
+    print(first.is_repeating_playlist())
